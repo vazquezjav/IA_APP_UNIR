@@ -1,0 +1,90 @@
+<div class="login-wrapper">
+    <!-- Abstract Shapes -->
+    <div class="blob blob-top-right"></div>
+    <div class="blob blob-bottom-left"></div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+        <div class="text-center mb-5">
+            <h1 class="text-900 text-3xl font-bold m-0">{{ activeTab === '0' ? 'Login' : (activeTab === '1' ? 'Register'
+                : 'Recover Password') }}</h1>
+        </div>
+
+        <!-- Login Form -->
+        <form *ngIf="activeTab === '0'" (ngSubmit)="onLogin()" #loginForm="ngForm" class="p-fluid">
+            <div class="field mb-4">
+                <label for="email" class="block text-500 font-medium mb-2">Email ID</label>
+                <input pInputText id="email" name="email" [(ngModel)]="loginData.email" required
+                    class="w-full p-inputtext-lg" placeholder="Enter your email">
+            </div>
+
+            <div class="field mb-2">
+                <label for="password" class="block text-500 font-medium mb-2">Password</label>
+                <p-password id="password" name="password" [(ngModel)]="loginData.password" [feedback]="false"
+                    [toggleMask]="true" required styleClass="w-full" inputStyleClass="w-full p-inputtext-lg"
+                    placeholder="Enter your password"></p-password>
+            </div>
+
+            <div class="flex justify-content-end mb-5">
+                <a (click)="activeTab = '2'"
+                    class="text-blue-500 font-medium no-underline cursor-pointer text-sm hover:text-blue-600 transition-colors">Forgot
+                    password?</a>
+            </div>
+
+            <p-button label="Login" type="submit" [disabled]="!loginForm.form.valid"
+                styleClass="w-full p-button-rounded p-button-lg bg-blue-600 border-blue-600 hover:bg-blue-700 shadow-3"></p-button>
+
+            <div class="text-center mt-4 mb-5">
+                <span class="text-600 text-sm">Don't have an account? <a (click)="activeTab = '1'"
+                        class="text-blue-500 font-bold no-underline cursor-pointer hover:text-blue-600 transition-colors">Create
+                        new</a></span>
+            </div>
+
+            <div class="separator flex align-items-center justify-content-center mb-5">
+                <span class="line flex-grow-1 border-top-1 surface-border"></span>
+                <span class="text-600 font-medium mx-3 text-sm">Or Login with</span>
+                <span class="line flex-grow-1 border-top-1 surface-border"></span>
+            </div>
+
+            <div class="flex justify-content-center">
+                <button pButton type="button"
+                    class="p-button-outlined p-button-secondary p-button-rounded px-4 py-2 flex align-items-center gap-2 bg-white hover:bg-gray-50 border-gray-300 shadow-1 transition-all">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"
+                        style="width: 20px; height: 20px;">
+                    <span class="text-700 font-medium">Sign in with Google</span>
+                </button>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form *ngIf="activeTab === '1'" (ngSubmit)="onRegister()" #registerForm="ngForm" class="p-fluid">
+            <div class="field mb-4">
+                <label for="reg-name" class="block text-500 font-medium mb-2">Full Name</label>
+                <input pInputText id="reg-name" name="name" [(ngModel)]="registerData.name" required
+                    class="w-full p-inputtext-lg" placeholder="Enter your full name">
+            </div>
+
+            <div class="field mb-4">
+                <label for="reg-email" class="block text-500 font-medium mb-2">Email ID</label>
+                <input pInputText id="reg-email" name="email" [(ngModel)]="registerData.email" required email
+                    class="w-full p-inputtext-lg" placeholder="Enter your email">
+            </div>
+
+            <div class="field mb-5">
+                <label for="reg-password" class="block text-500 font-medium mb-2">Password</label>
+                <p-password id="reg-password" name="password" [(ngModel)]="registerData.password" [feedback]="true"
+                    [toggleMask]="true" required styleClass="w-full" inputStyleClass="w-full p-inputtext-lg"
+                    placeholder="Create a password"></p-password>
+            </div>
+
+            <p-button label="Register" type="submit" [disabled]="!registerForm.form.valid"
+                styleClass="w-full p-button-rounded p-button-lg bg-blue-600 border-blue-600 hover:bg-blue-700 shadow-3"></p-button>
+
+            <div class="text-center mt-4">
+                <span class="text-600 text-sm">Already have an account? <a (click)="activeTab = '0'"
+                        class="text-blue-500 font-bold no-underline cursor-pointer hover:text-blue-600 transition-colors">Login
+                        here</a></span>
+            </div>
+        </form>
+    </div>
+</div>

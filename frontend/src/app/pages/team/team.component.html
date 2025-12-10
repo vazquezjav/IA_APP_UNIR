@@ -1,0 +1,75 @@
+<div class="surface-ground min-h-screen p-4 md:p-6 lg:p-8">
+    <!-- Header -->
+    <div class="text-center mb-6">
+        <h1 class="text-900 text-4xl font-bold mb-3">Nuestro Equipo</h1>
+        <p class="text-500 text-xl mt-0">Conoce a las mentes detrás de Vuelos.</p>
+    </div>
+
+    <!-- Team Grid -->
+    <div class="grid justify-content-center mb-8">
+        <div class="col-12 md:col-6 lg:col-4 p-3">
+            <p-card styleClass="text-center h-full shadow-4 border-round-xl">
+                <div class="flex justify-content-center mb-4">
+                    <p-avatar label="CC" shape="circle" size="xlarge" styleClass="bg-blue-100 text-blue-600 text-2xl"
+                        [style]="{'width':'100px', 'height':'100px', 'font-size': '2.5rem'}"></p-avatar>
+                    <!-- Alternatively use image: <p-avatar image="path/to/img" ...></p-avatar> -->
+                </div>
+                <h3 class="text-900 text-2xl font-bold mb-1">Capitán Código</h3>
+                <p class="text-gray-500 font-medium mt-0">Lead Developer</p>
+                <p class="text-600 line-height-3">Experto en Angular y navegación aérea.</p>
+            </p-card>
+        </div>
+        <div class="col-12 md:col-6 lg:col-4 p-3">
+            <p-card styleClass="text-center h-full shadow-4 border-round-xl">
+                <div class="flex justify-content-center mb-4">
+                    <p-avatar label="AA" shape="circle" size="xlarge" styleClass="bg-green-100 text-green-600 text-2xl"
+                        [style]="{'width':'100px', 'height':'100px', 'font-size': '2.5rem'}"></p-avatar>
+                </div>
+                <h3 class="text-900 text-2xl font-bold mb-1">Ana Analista</h3>
+                <p class="text-gray-500 font-medium mt-0">Data Scientist</p>
+                <p class="text-600 line-height-3">Especialista en patrones de vuelo y datos en tiempo real.</p>
+            </p-card>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="grid justify-content-center">
+        <div class="col-12 md:col-8 lg:col-6">
+            <p-card styleClass="shadow-6 border-round-2xl px-4 py-2">
+                <div class="text-center mb-5">
+                    <h2 class="text-900 font-bold text-3xl mb-2">Contáctanos</h2>
+                    <p class="text-600 text-lg mt-0">Estamos aquí para ayudarte.</p>
+                </div>
+
+                <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="p-fluid">
+                    <div class="field mb-5 mt-2">
+                        <p-floatLabel>
+                            <input pInputText id="name" name="name" [(ngModel)]="contactData.name" required
+                                class="w-full">
+                            <label for="name">Nombre</label>
+                        </p-floatLabel>
+                    </div>
+
+                    <div class="field mb-5">
+                        <p-floatLabel>
+                            <input pInputText id="email" name="email" [(ngModel)]="contactData.email" required email
+                                class="w-full">
+                            <label for="email">Correo Electrónico</label>
+                        </p-floatLabel>
+                    </div>
+
+                    <div class="field mb-5">
+                        <p-floatLabel>
+                            <textarea pTextarea id="message" name="message" [(ngModel)]="contactData.message" rows="5"
+                                required class="w-full"></textarea>
+                            <label for="message">Mensaje</label>
+                        </p-floatLabel>
+                    </div>
+
+                    <p-button label="Enviar Mensaje" type="submit" [disabled]="!contactForm.form.valid"
+                        styleClass="w-full p-button-lg p-button-rounded"></p-button>
+                </form>
+            </p-card>
+        </div>
+    </div>
+</div>

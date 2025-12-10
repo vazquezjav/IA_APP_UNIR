@@ -1,0 +1,116 @@
+/* Force full screen white background, covering any global dark theme */
+:host {
+    display: block;
+}
+
+.login-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* Lower than Navbar (1000) */
+    padding-top: 60px;
+    /* Prevent overlap with Navbar */
+    overflow: hidden;
+}
+
+/* Abstract Blue Shapes */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+.blob-top-right {
+    top: -150px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(-15deg);
+}
+
+.blob-bottom-left {
+    bottom: -200px;
+    left: -150px;
+    width: 700px;
+    height: 700px;
+    background: linear-gradient(45deg, #00C6FF 0%, #0072FF 100%);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(15deg);
+}
+
+/* Login Card */
+.login-card {
+    position: relative;
+    z-index: 10;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography Overrides */
+h1 {
+    color: #1a1a1a;
+}
+
+label {
+    color: #666666;
+}
+
+/* PrimeNG Overrides - FORCE STYLES */
+:host ::ng-deep .p-inputtext {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb !important;
+}
+
+:host ::ng-deep .p-inputtext:focus {
+    border-color: #0072FF !important;
+    box-shadow: 0 0 0 2px rgba(0, 114, 255, 0.2) !important;
+}
+
+:host ::ng-deep .p-password-input {
+    width: 100%;
+}
+
+/* Force Blue Button */
+:host ::ng-deep .p-button {
+    background-color: #0072FF !important;
+    border-color: #0072FF !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    /* Pill shape */
+    font-weight: 600;
+}
+
+:host ::ng-deep .p-button:hover {
+    background-color: #005bb5 !important;
+    border-color: #005bb5 !important;
+}
+
+/* Google Button Override (keep it white) */
+:host ::ng-deep .p-button.p-button-outlined.p-button-secondary {
+    background-color: #ffffff !important;
+    color: #374151 !important;
+    border: 1px solid #d1d5db !important;
+}
+
+/* Separator */
+.separator .line {
+    height: 1px;
+    background-color: #e5e7eb;
+}

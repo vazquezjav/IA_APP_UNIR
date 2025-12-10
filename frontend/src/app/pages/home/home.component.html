@@ -1,0 +1,76 @@
+<div class="home-container">
+    <!-- Video Background -->
+    <div class="video-background">
+        <!-- Video local fallback -->
+        <video autoplay muted loop playsinline poster="assets/poster.png">
+            <source src="assets/background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="live-indicator">
+                <span class="pulse"></span> EN VIVO AHORA
+            </div>
+            <h1 class="hero-title">DESCUBRE EL CIELO<br>EN TIEMPO REAL</h1>
+            <p class="hero-subtitle">La plataforma de rastreo de vuelos más avanzada y elegante.</p>
+            <a routerLink="/en-vivo" class="cta-button">VER EL MAPA</a>
+        </div>
+    </section>
+
+    <!-- Stats & Chart Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>150,000+</h3>
+                    <p>Vuelos Diarios</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1,200+</h3>
+                    <p>Aerolíneas Activas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>4,000+</h3>
+                    <p>Aeropuertos</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2 class="section-title">Países con Más Vuelos (Últimos 2 Años)</h2>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features (Below the fold) -->
+    <section class="features-section">
+        <div class="bento-grid">
+            <div class="bento-item item-large">
+                <h2>Cobertura Global</h2>
+                <p>Datos precisos de OpenSky Network en todo el mundo.</p>
+                <div class="icon-placeholder">🌍</div>
+            </div>
+            <div class="bento-item item-medium">
+                <h3>Datos en Vivo</h3>
+                <p>Actualización constante de posición y altitud.</p>
+            </div>
+            <div class="bento-item item-medium">
+                <h3>Flota Mundial</h3>
+                <p>Miles de aeronaves rastreadas simultáneamente.</p>
+            </div>
+            <div class="bento-item item-wide">
+                <div class="content-row">
+                    <div>
+                        <h3>Únete a la Comunidad</h3>
+                        <p>Regístrate para guardar tus preferencias.</p>
+                    </div>
+                    <a routerLink="/login" class="secondary-button">Crear Cuenta</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

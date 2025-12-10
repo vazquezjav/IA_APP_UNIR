@@ -1,0 +1,24 @@
+<div class="card">
+  <p-menubar [model]="items" styleClass="border-none shadow-1 border-noround px-4 py-2 bg-white-alpha-90">
+    <!-- <ng-template pTemplate="start">
+      <a routerLink="/" class="flex align-items-center no-underline mr-4">
+        <i class="pi pi-globe text-2xl mr-2 text-primary"></i>
+        <span class="font-bold text-xl text-primary">VUELOS</span>
+      </a>
+    </ng-template> -->
+    <ng-template pTemplate="start">
+      <a routerLink="/" class="flex align-items-center no-underline mr-4">
+        <img src="./../../../assets/plane2.png" alt="Logo" style="height: 50px; width: auto;" />
+      </a>
+    </ng-template>
+
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-2">
+        <a *ngIf="!authService.isLoggedIn()" routerLink="/login" pButton label="Login" icon="pi pi-user"
+          class="p-button-text font-bold text-primary"></a>
+        <a *ngIf="authService.isLoggedIn()" (click)="authService.logout()" pButton label="Salir" icon="pi pi-power-off"
+          class="p-button-text p-button-danger font-bold"></a>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

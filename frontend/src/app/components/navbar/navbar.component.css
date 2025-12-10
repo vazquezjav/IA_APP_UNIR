@@ -1,0 +1,16 @@
+:host {
+    display: block;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Force menu items to the right */
+:host ::ng-deep .p-menubar .p-menubar-root-list {
+    margin-left: auto;
+}
+
+:host ::ng-deep .p-menubar {
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    border: none;
+}

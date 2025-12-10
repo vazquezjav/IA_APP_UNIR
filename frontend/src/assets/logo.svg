@@ -1,0 +1,18 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="globeGradient" x1="400" y1="180" x2="400" y2="450" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4FCDF5"/>
+            <stop offset="1" stop-color="#2EACE3"/>
+        </linearGradient>
+    </defs>
+
+    <text x="50" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="72" fill="#000000">JAVAZQ</text>
+
+    <g transform="translate(0, 50)">
+        <path d="M200 350 C 200 250, 400 200, 600 200 L 580 220 C 400 230, 250 280, 250 380 C 250 400, 300 410, 350 420 L 550 400 C 580 398, 600 400, 630 402 L 600 405 C 400 415, 180 400, 180 350 Z" fill="#0E414F"/>
+
+        <circle cx="400" cy="315" r="130" fill="url(#globeGradient)"/>
+
+        <path d="M650 200 L 630 210 L 640 215 L 610 230 L 600 235 L 580 225 L 590 215 L 580 210 L 600 200 L 640 190 L 650 200 Z" fill="#0E414F" transform="rotate(-15 615 215) translate(0, -10)"/>
+    </g>
+</svg>

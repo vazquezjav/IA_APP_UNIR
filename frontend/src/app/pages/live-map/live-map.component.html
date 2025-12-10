@@ -1,0 +1,8 @@
+<div class="map-container">
+    <div class="map-filters">
+        <button [class.active]="currentFilter === 'all'" (click)="setFilter('all')">Todos</button>
+        <button [class.active]="currentFilter === 'commercial'" (click)="setFilter('commercial')">Comerciales</button>
+        <button [class.active]="currentFilter === 'military'" (click)="setFilter('military')">Militares</button>
+    </div>
+    <div id="map"></div>
+</div>

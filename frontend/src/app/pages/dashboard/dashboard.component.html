@@ -1,0 +1,129 @@
+<div class="dashboard-container p-4">
+    <div class="grid">
+        <!-- User Profile Section -->
+        <div class="col-12 md:col-4">
+            <p-card header="Mi Perfil" styleClass="h-full shadow-4">
+                <div class="flex flex-column align-items-center text-center">
+                    <p-avatar [image]="user?.photoUrl || 'assets/default-user.png'" size="xlarge" shape="circle"
+                        styleClass="mb-3"></p-avatar>
+                    <h2 class="m-0 text-900">{{ user?.name }}</h2>
+                    <p class="text-500 mb-3">{{ user?.email }}</p>
+                    <span class="px-3 py-1 border-round-2xl font-bold text-sm mb-3"
+                        [ngClass]="{'bg-green-100 text-green-700': !isAdmin, 'bg-blue-100 text-blue-700': isAdmin}">
+                        {{ isAdmin ? 'ADMINISTRADOR' : 'USUARIO' }}
+                    </span>
+                    <p-button label="Editar Perfil" icon="pi pi-user-edit" styleClass="p-button-outlined p-button-sm"
+                        (onClick)="showEditProfile()"></p-button>
+                </div>
+            </p-card>
+        </div>
+
+        <!-- Admin Dashboard Section -->
+        <div class="col-12 md:col-8" *ngIf="isAdmin">
+            <div class="grid">
+                <!-- Stats Card -->
+                <div class="col-12 md:col-6">
+                    <p-card styleClass="bg-blue-500 text-white shadow-4 h-full">
+                        <div class="flex justify-content-between align-items-center mb-3">
+                            <span class="text-xl font-bold">Vuelos (Última Hora)</span>
+                            <i class="pi pi-clock text-3xl"></i>
+                        </div>
+                        <div class="text-5xl font-bold">{{ flightsLastHour }}</div>
+                        <div class="mt-2 text-blue-100">Actualizados recientemente</div>
+                    </p-card>
+                </div>
+
+                <!-- Report Card -->
+                <div class="col-12 md:col-6">
+                    <p-card
+                        styleClass="shadow-4 h-full flex flex-column justify-content-center align-items-center text-center">
+                        <i class="pi pi-file-excel text-green-500 text-5xl mb-3"></i>
+                        <h3 class="m-0 mb-2">Reporte de Vuelos</h3>
+                        <p class="text-500 mb-3">Descarga el estado actual en Excel</p>
+                        <p-button label="Descargar Reporte" icon="pi pi-download" styleClass="p-button-success"
+                            (onClick)="downloadReport()"></p-button>
+                    </p-card>
+                </div>
+
+                <!-- Login History Table -->
+                <div class="col-12 mt-4">
+                    <p-card header="Historial de Usuarios" subheader="Registro de accesos al sistema"
+                        styleClass="shadow-4">
+                        <p-table [value]="loginHistory" [rows]="5" [paginator]="true" responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Último Acceso</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-u>
+                                <tr>
+                                    <td>{{ u.name }}</td>
+                                    <td>{{ u.email }}</td>
+                                    <td>
+                                        <span [class]="'customer-badge status-' + u.role">{{ u.role }}</span>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="u.loginHistory && u.loginHistory.length > 0">
+                                            {{ u.loginHistory[u.loginHistory.length - 1] | date:'medium' }}
+                                        </div>
+                                        <div *ngIf="!u.loginHistory || u.loginHistory.length === 0">
+                                            Nunca
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Welcome Message (if not admin) -->
+        <div class="col-12 md:col-8" *ngIf="!isAdmin">
+            <p-card styleClass="shadow-4 h-full flex align-items-center justify-content-center bg-blue-50">
+                <div class="text-center p-5">
+                    <i class="pi pi-compass text-blue-500 text-6xl mb-4"></i>
+                    <h1 class="text-blue-900 m-0">¡Bienvenido a Vuelos App!</h1>
+                    <p class="text-700 text-xl mt-3">Explora el mapa en vivo para ver el tráfico aéreo mundial.</p>
+                    <p-button label="Ir al Mapa" icon="pi pi-map" styleClass="mt-4 p-button-rounded p-button-lg"
+                        routerLink="/en-vivo"></p-button>
+                </div>
+            </p-card>
+        </div>
+    </div>
+
+    <!-- Edit Profile Dialog -->
+    <p-dialog header="Editar Perfil" [(visible)]="displayEditProfile" [modal]="true" [style]="{width: '400px'}"
+        [draggable]="false" [resizable]="false">
+        <div class="p-fluid">
+            <div class="field">
+                <label for="name">Nombre Completo</label>
+                <input pInputText id="name" [(ngModel)]="editData.name" />
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input pInputText id="email" [(ngModel)]="editData.email" />
+            </div>
+            <div class="field">
+                <label for="photoUrl">Foto de Perfil</label>
+                <div class="flex flex-column gap-2">
+                    <input type="file" accept="image/*" (change)="onFileSelected($event)" class="w-full" />
+                    <small class="text-500">Selecciona una imagen (max 1MB)</small>
+                    <div *ngIf="editData.photoUrl" class="flex align-items-center gap-2 mt-2">
+                        <img [src]="editData.photoUrl" alt="Preview"
+                            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <span class="text-sm text-green-600">Imagen seleccionada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button label="Cancelar" icon="pi pi-times" (onClick)="displayEditProfile = false"
+                styleClass="p-button-text"></p-button>
+            <p-button label="Guardar" icon="pi pi-check" (onClick)="saveProfile()" autofocus></p-button>
+        </ng-template>
+    </p-dialog>
+</div>
