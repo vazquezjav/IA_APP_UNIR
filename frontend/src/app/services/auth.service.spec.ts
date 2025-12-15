@@ -86,4 +86,48 @@ describe('AuthService', () => {
         const req = httpMock.expectOne('http://localhost:3000/api/register');
         req.flush('Server Error', mockError);
     });
+
+    it('should check if user is admin', () => {
+        (service as any).userSubject.next({ role: 'admin' });
+        expect(service.isAdmin()).toBeTrue();
+
+        (service as any).userSubject.next({ role: 'user' });
+        expect(service.isAdmin()).toBeFalse();
+
+        (service as any).userSubject.next(null);
+        expect(service.isAdmin()).toBeFalse();
+    });
+
+    it('should update profile', () => {
+        const mockResponse = { user: { name: 'Updated' } };
+        service.updateProfile({ name: 'Updated' }).subscribe(res => {
+            expect(res).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne('http://localhost:3000/api/profile');
+        expect(req.request.method).toBe('PUT');
+        req.flush(mockResponse);
+    });
+
+    it('should get flights last hour stats', () => {
+        const mockResponse = { count: 100 };
+        service.getFlightsLastHour().subscribe(res => {
+            expect(res).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne('http://localhost:3000/api/flights/stats/last-hour');
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
+
+    it('should get login history', () => {
+        const mockResponse = [{ date: '2023-01-01' }];
+        service.getLoginHistory().subscribe(res => {
+            expect(res).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne('http://localhost:3000/api/auth/history');
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
 });
